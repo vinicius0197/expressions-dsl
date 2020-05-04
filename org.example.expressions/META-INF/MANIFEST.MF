@@ -15,15 +15,17 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.example.expressions.generator,
- org.example.expressions.parser.antlr.internal,
- org.example.expressions.expressions.util,
- org.example.expressions.services,
+Export-Package: org.example.expressions,
  org.example.expressions.expressions,
  org.example.expressions.expressions.impl,
- org.example.expressions,
+ org.example.expressions.expressions.util,
+ org.example.expressions.generator,
+ org.example.expressions.interpreter,
+ org.example.expressions.parser.antlr,
+ org.example.expressions.parser.antlr.internal,
  org.example.expressions.scoping,
  org.example.expressions.serializer,
- org.example.expressions.parser.antlr,
+ org.example.expressions.services,
+ org.example.expressions.typing,
  org.example.expressions.validation
 Import-Package: org.apache.log4j
