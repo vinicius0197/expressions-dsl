@@ -44,12 +44,13 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVariableParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEvalExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSimplifyExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//AbstractElement:
-		//	Variable | EvalExpression;
+		//	Variable | EvalExpression | SimplifyExpression;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Variable | EvalExpression
+		//Variable | EvalExpression | SimplifyExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Variable
@@ -57,6 +58,9 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EvalExpression
 		public RuleCall getEvalExpressionParserRuleCall_1() { return cEvalExpressionParserRuleCall_1; }
+		
+		//SimplifyExpression
+		public RuleCall getSimplifyExpressionParserRuleCall_2() { return cSimplifyExpressionParserRuleCall_2; }
 	}
 	public class VariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.example.expressions.Expressions.Variable");
@@ -116,16 +120,74 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		//Expression
 		public RuleCall getExpressionExpressionParserRuleCall_1_0() { return cExpressionExpressionParserRuleCall_1_0; }
 	}
-	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.example.expressions.Expressions.Expression");
-		private final RuleCall cOrParserRuleCall = (RuleCall)rule.eContents().get(1);
+	public class SimplifyExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.example.expressions.Expressions.SimplifyExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cSimplifyKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
 		
-		//Expression:
-		//	Or;
+		//SimplifyExpression:
+		//	'simplify' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//'simplify' expression=Expression
+		public Group getGroup() { return cGroup; }
+		
+		//'simplify'
+		public Keyword getSimplifyKeyword_0() { return cSimplifyKeyword_0; }
+		
+		//expression=Expression
+		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+		
+		//Expression
+		public RuleCall getExpressionExpressionParserRuleCall_1_0() { return cExpressionExpressionParserRuleCall_1_0; }
+	}
+	public class ExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.example.expressions.Expressions.Expression");
+		private final RuleCall cImplicationParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//Expression:
+		//	Implication;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Implication
+		public RuleCall getImplicationParserRuleCall() { return cImplicationParserRuleCall; }
+	}
+	public class ImplicationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.example.expressions.Expressions.Implication");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cOrParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cImplicationLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cHyphenMinusGreaterThanSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightOrParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		
+		//Implication Expression:
+		//	Or ({Implication.left=current} "->" right=Or)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Or ({Implication.left=current} "->" right=Or)*
+		public Group getGroup() { return cGroup; }
+		
 		//Or
-		public RuleCall getOrParserRuleCall() { return cOrParserRuleCall; }
+		public RuleCall getOrParserRuleCall_0() { return cOrParserRuleCall_0; }
+		
+		//({Implication.left=current} "->" right=Or)*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{Implication.left=current}
+		public Action getImplicationLeftAction_1_0() { return cImplicationLeftAction_1_0; }
+		
+		//"->"
+		public Keyword getHyphenMinusGreaterThanSignKeyword_1_1() { return cHyphenMinusGreaterThanSignKeyword_1_1; }
+		
+		//right=Or
+		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+		
+		//Or
+		public RuleCall getRightOrParserRuleCall_1_2_0() { return cRightOrParserRuleCall_1_2_0; }
 	}
 	public class OrElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.example.expressions.Expressions.Or");
@@ -359,47 +421,51 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrimaryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cMulOrDivLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Assignment cOpAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final Alternatives cOpAlternatives_1_1_0 = (Alternatives)cOpAssignment_1_1.eContents().get(0);
-		private final Keyword cOpAsteriskKeyword_1_1_0_0 = (Keyword)cOpAlternatives_1_1_0.eContents().get(0);
-		private final Keyword cOpSolidusKeyword_1_1_0_1 = (Keyword)cOpAlternatives_1_1_0.eContents().get(1);
-		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cRightPrimaryParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		private final Group cGroup_1_0 = (Group)cGroup_1.eContents().get(0);
+		private final Action cMulOrDivLeftAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
+		private final Assignment cOpAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final Alternatives cOpAlternatives_1_0_1_0 = (Alternatives)cOpAssignment_1_0_1.eContents().get(0);
+		private final Keyword cOpAsteriskKeyword_1_0_1_0_0 = (Keyword)cOpAlternatives_1_0_1_0.eContents().get(0);
+		private final Keyword cOpSolidusKeyword_1_0_1_0_1 = (Keyword)cOpAlternatives_1_0_1_0.eContents().get(1);
+		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cRightPrimaryParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
 		//MulOrDiv Expression:
-		//	Primary ({MulOrDiv.left=current} op=('*' | '/') right=Primary)*;
+		//	Primary (({MulOrDiv.left=current} op=('*' | '/')) right=Primary)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Primary ({MulOrDiv.left=current} op=('*' | '/') right=Primary)*
+		//Primary (({MulOrDiv.left=current} op=('*' | '/')) right=Primary)*
 		public Group getGroup() { return cGroup; }
 		
 		//Primary
 		public RuleCall getPrimaryParserRuleCall_0() { return cPrimaryParserRuleCall_0; }
 		
-		//({MulOrDiv.left=current} op=('*' | '/') right=Primary)*
+		//(({MulOrDiv.left=current} op=('*' | '/')) right=Primary)*
 		public Group getGroup_1() { return cGroup_1; }
 		
+		//({MulOrDiv.left=current} op=('*' | '/'))
+		public Group getGroup_1_0() { return cGroup_1_0; }
+		
 		//{MulOrDiv.left=current}
-		public Action getMulOrDivLeftAction_1_0() { return cMulOrDivLeftAction_1_0; }
+		public Action getMulOrDivLeftAction_1_0_0() { return cMulOrDivLeftAction_1_0_0; }
 		
 		//op=('*' | '/')
-		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
+		public Assignment getOpAssignment_1_0_1() { return cOpAssignment_1_0_1; }
 		
 		//('*' | '/')
-		public Alternatives getOpAlternatives_1_1_0() { return cOpAlternatives_1_1_0; }
+		public Alternatives getOpAlternatives_1_0_1_0() { return cOpAlternatives_1_0_1_0; }
 		
 		//'*'
-		public Keyword getOpAsteriskKeyword_1_1_0_0() { return cOpAsteriskKeyword_1_1_0_0; }
+		public Keyword getOpAsteriskKeyword_1_0_1_0_0() { return cOpAsteriskKeyword_1_0_1_0_0; }
 		
 		//'/'
-		public Keyword getOpSolidusKeyword_1_1_0_1() { return cOpSolidusKeyword_1_1_0_1; }
+		public Keyword getOpSolidusKeyword_1_0_1_0_1() { return cOpSolidusKeyword_1_0_1_0_1; }
 		
 		//right=Primary
-		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
 		
 		//Primary
-		public RuleCall getRightPrimaryParserRuleCall_1_2_0() { return cRightPrimaryParserRuleCall_1_2_0; }
+		public RuleCall getRightPrimaryParserRuleCall_1_1_0() { return cRightPrimaryParserRuleCall_1_1_0; }
 	}
 	public class PrimaryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.example.expressions.Expressions.Primary");
@@ -547,7 +613,9 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	private final AbstractElementElements pAbstractElement;
 	private final VariableElements pVariable;
 	private final EvalExpressionElements pEvalExpression;
+	private final SimplifyExpressionElements pSimplifyExpression;
 	private final ExpressionElements pExpression;
+	private final ImplicationElements pImplication;
 	private final OrElements pOr;
 	private final AndElements pAnd;
 	private final EqualityElements pEquality;
@@ -570,7 +638,9 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAbstractElement = new AbstractElementElements();
 		this.pVariable = new VariableElements();
 		this.pEvalExpression = new EvalExpressionElements();
+		this.pSimplifyExpression = new SimplifyExpressionElements();
 		this.pExpression = new ExpressionElements();
+		this.pImplication = new ImplicationElements();
 		this.pOr = new OrElements();
 		this.pAnd = new AndElements();
 		this.pEquality = new EqualityElements();
@@ -619,7 +689,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//AbstractElement:
-	//	Variable | EvalExpression;
+	//	Variable | EvalExpression | SimplifyExpression;
 	public AbstractElementElements getAbstractElementAccess() {
 		return pAbstractElement;
 	}
@@ -648,14 +718,34 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 		return getEvalExpressionAccess().getRule();
 	}
 	
+	//SimplifyExpression:
+	//	'simplify' expression=Expression;
+	public SimplifyExpressionElements getSimplifyExpressionAccess() {
+		return pSimplifyExpression;
+	}
+	
+	public ParserRule getSimplifyExpressionRule() {
+		return getSimplifyExpressionAccess().getRule();
+	}
+	
 	//Expression:
-	//	Or;
+	//	Implication;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
 		return getExpressionAccess().getRule();
+	}
+	
+	//Implication Expression:
+	//	Or ({Implication.left=current} "->" right=Or)*;
+	public ImplicationElements getImplicationAccess() {
+		return pImplication;
+	}
+	
+	public ParserRule getImplicationRule() {
+		return getImplicationAccess().getRule();
 	}
 	
 	//Or Expression:
@@ -709,7 +799,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//MulOrDiv Expression:
-	//	Primary ({MulOrDiv.left=current} op=('*' | '/') right=Primary)*;
+	//	Primary (({MulOrDiv.left=current} op=('*' | '/')) right=Primary)*;
 	public MulOrDivElements getMulOrDivAccess() {
 		return pMulOrDiv;
 	}

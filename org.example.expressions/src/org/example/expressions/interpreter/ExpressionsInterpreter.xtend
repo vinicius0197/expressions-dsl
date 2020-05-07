@@ -17,6 +17,8 @@ import org.example.expressions.expressions.Plus
 import org.example.expressions.expressions.StringConstant
 import org.example.expressions.expressions.VariableRef
 import org.example.expressions.typing.ExpressionsTypeComputer
+import org.example.expressions.expressions.Implication
+import org.example.expressions.expressions.SimplifyExpression
 
 class ExpressionsInterpreter {
 
@@ -61,6 +63,9 @@ class ExpressionsInterpreter {
 			Or: {
 				(e.left.interpret as Boolean) || (e.right.interpret as Boolean)
 			}
+			Implication: {
+				!(e.left.interpret as Boolean) || (e.left.interpret as Boolean)
+			}
 			Comparison: {
 				if (e.left.typeFor.isStringType) {
 					val left = e.left.interpret as String
@@ -85,7 +90,6 @@ class ExpressionsInterpreter {
 				}
 			}
 			VariableRef: {
-				// avoid interpreting the same variable over and over again
 				val v = e.variable
 				cache.get("interpret" -> v, e.eResource) [
 					v.interpret
@@ -93,8 +97,21 @@ class ExpressionsInterpreter {
 			}
 		}
 	}
+	
+	def Object simplify(Expression e) {
+		switch(e) {
+			Implication: {
+				"! " + (e.left.interpret) + " || " + (e.right.interpret)
+			}
+		}
+	}
 
 	def dispatch Object interpret(AbstractElement e) {
-		e.expression.interpret
+		InputOutput.<String>println("DEBUG")
+		if(e instanceof SimplifyExpression) {
+			e.expression.simplify
+		} else {
+			e.expression.interpret
+		}
 	}
 }

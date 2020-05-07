@@ -96,9 +96,19 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
         return createEvalExpressionAdapter();
       }
       @Override
+      public Adapter caseSimplifyExpression(SimplifyExpression object)
+      {
+        return createSimplifyExpressionAdapter();
+      }
+      @Override
       public Adapter caseExpression(Expression object)
       {
         return createExpressionAdapter();
+      }
+      @Override
+      public Adapter caseImplication(Implication object)
+      {
+        return createImplicationAdapter();
       }
       @Override
       public Adapter caseOr(Or object)
@@ -243,6 +253,21 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.example.expressions.expressions.SimplifyExpression <em>Simplify Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.example.expressions.expressions.SimplifyExpression
+   * @generated
+   */
+  public Adapter createSimplifyExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.example.expressions.expressions.Expression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -253,6 +278,21 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.example.expressions.expressions.Implication <em>Implication</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.example.expressions.expressions.Implication
+   * @generated
+   */
+  public Adapter createImplicationAdapter()
   {
     return null;
   }

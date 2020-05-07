@@ -21,12 +21,14 @@ import org.example.expressions.expressions.Equality;
 import org.example.expressions.expressions.EvalExpression;
 import org.example.expressions.expressions.ExpressionsModel;
 import org.example.expressions.expressions.ExpressionsPackage;
+import org.example.expressions.expressions.Implication;
 import org.example.expressions.expressions.IntConstant;
 import org.example.expressions.expressions.Minus;
 import org.example.expressions.expressions.MulOrDiv;
 import org.example.expressions.expressions.Not;
 import org.example.expressions.expressions.Or;
 import org.example.expressions.expressions.Plus;
+import org.example.expressions.expressions.SimplifyExpression;
 import org.example.expressions.expressions.StringConstant;
 import org.example.expressions.expressions.Variable;
 import org.example.expressions.expressions.VariableRef;
@@ -64,6 +66,9 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 			case ExpressionsPackage.EXPRESSIONS_MODEL:
 				sequence_ExpressionsModel(context, (ExpressionsModel) semanticObject); 
 				return; 
+			case ExpressionsPackage.IMPLICATION:
+				sequence_Implication(context, (Implication) semanticObject); 
+				return; 
 			case ExpressionsPackage.INT_CONSTANT:
 				sequence_Atomic(context, (IntConstant) semanticObject); 
 				return; 
@@ -82,6 +87,9 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 			case ExpressionsPackage.PLUS:
 				sequence_PlusOrMinus(context, (Plus) semanticObject); 
 				return; 
+			case ExpressionsPackage.SIMPLIFY_EXPRESSION:
+				sequence_SimplifyExpression(context, (SimplifyExpression) semanticObject); 
+				return; 
 			case ExpressionsPackage.STRING_CONSTANT:
 				sequence_Atomic(context, (StringConstant) semanticObject); 
 				return; 
@@ -99,6 +107,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns And
+	 *     Implication returns And
+	 *     Implication.Implication_1_0 returns And
 	 *     Or returns And
 	 *     Or.Or_1_0 returns And
 	 *     And returns And
@@ -111,7 +121,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns And
 	 *     PlusOrMinus.Minus_1_0_1_0 returns And
 	 *     MulOrDiv returns And
-	 *     MulOrDiv.MulOrDiv_1_0 returns And
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns And
 	 *     Primary returns And
 	 *
 	 * Constraint:
@@ -134,6 +144,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns BoolConstant
+	 *     Implication returns BoolConstant
+	 *     Implication.Implication_1_0 returns BoolConstant
 	 *     Or returns BoolConstant
 	 *     Or.Or_1_0 returns BoolConstant
 	 *     And returns BoolConstant
@@ -146,7 +158,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns BoolConstant
 	 *     PlusOrMinus.Minus_1_0_1_0 returns BoolConstant
 	 *     MulOrDiv returns BoolConstant
-	 *     MulOrDiv.MulOrDiv_1_0 returns BoolConstant
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns BoolConstant
 	 *     Primary returns BoolConstant
 	 *     Atomic returns BoolConstant
 	 *
@@ -161,6 +173,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns IntConstant
+	 *     Implication returns IntConstant
+	 *     Implication.Implication_1_0 returns IntConstant
 	 *     Or returns IntConstant
 	 *     Or.Or_1_0 returns IntConstant
 	 *     And returns IntConstant
@@ -173,7 +187,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns IntConstant
 	 *     PlusOrMinus.Minus_1_0_1_0 returns IntConstant
 	 *     MulOrDiv returns IntConstant
-	 *     MulOrDiv.MulOrDiv_1_0 returns IntConstant
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns IntConstant
 	 *     Primary returns IntConstant
 	 *     Atomic returns IntConstant
 	 *
@@ -194,6 +208,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns StringConstant
+	 *     Implication returns StringConstant
+	 *     Implication.Implication_1_0 returns StringConstant
 	 *     Or returns StringConstant
 	 *     Or.Or_1_0 returns StringConstant
 	 *     And returns StringConstant
@@ -206,7 +222,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns StringConstant
 	 *     PlusOrMinus.Minus_1_0_1_0 returns StringConstant
 	 *     MulOrDiv returns StringConstant
-	 *     MulOrDiv.MulOrDiv_1_0 returns StringConstant
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns StringConstant
 	 *     Primary returns StringConstant
 	 *     Atomic returns StringConstant
 	 *
@@ -227,6 +243,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns VariableRef
+	 *     Implication returns VariableRef
+	 *     Implication.Implication_1_0 returns VariableRef
 	 *     Or returns VariableRef
 	 *     Or.Or_1_0 returns VariableRef
 	 *     And returns VariableRef
@@ -239,7 +257,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns VariableRef
 	 *     PlusOrMinus.Minus_1_0_1_0 returns VariableRef
 	 *     MulOrDiv returns VariableRef
-	 *     MulOrDiv.MulOrDiv_1_0 returns VariableRef
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns VariableRef
 	 *     Primary returns VariableRef
 	 *     Atomic returns VariableRef
 	 *
@@ -260,6 +278,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns Comparison
+	 *     Implication returns Comparison
+	 *     Implication.Implication_1_0 returns Comparison
 	 *     Or returns Comparison
 	 *     Or.Or_1_0 returns Comparison
 	 *     And returns Comparison
@@ -272,7 +292,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns Comparison
 	 *     PlusOrMinus.Minus_1_0_1_0 returns Comparison
 	 *     MulOrDiv returns Comparison
-	 *     MulOrDiv.MulOrDiv_1_0 returns Comparison
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns Comparison
 	 *     Primary returns Comparison
 	 *
 	 * Constraint:
@@ -286,6 +306,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns Equality
+	 *     Implication returns Equality
+	 *     Implication.Implication_1_0 returns Equality
 	 *     Or returns Equality
 	 *     Or.Or_1_0 returns Equality
 	 *     And returns Equality
@@ -298,7 +320,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns Equality
 	 *     PlusOrMinus.Minus_1_0_1_0 returns Equality
 	 *     MulOrDiv returns Equality
-	 *     MulOrDiv.MulOrDiv_1_0 returns Equality
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns Equality
 	 *     Primary returns Equality
 	 *
 	 * Constraint:
@@ -342,7 +364,46 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	
 	/**
 	 * Contexts:
+	 *     Expression returns Implication
+	 *     Implication returns Implication
+	 *     Implication.Implication_1_0 returns Implication
+	 *     Or returns Implication
+	 *     Or.Or_1_0 returns Implication
+	 *     And returns Implication
+	 *     And.And_1_0 returns Implication
+	 *     Equality returns Implication
+	 *     Equality.Equality_1_0 returns Implication
+	 *     Comparison returns Implication
+	 *     Comparison.Comparison_1_0 returns Implication
+	 *     PlusOrMinus returns Implication
+	 *     PlusOrMinus.Plus_1_0_0_0 returns Implication
+	 *     PlusOrMinus.Minus_1_0_1_0 returns Implication
+	 *     MulOrDiv returns Implication
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns Implication
+	 *     Primary returns Implication
+	 *
+	 * Constraint:
+	 *     (left=Implication_Implication_1_0 right=Or)
+	 */
+	protected void sequence_Implication(ISerializationContext context, Implication semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.IMPLICATION__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.IMPLICATION__LEFT));
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.IMPLICATION__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.IMPLICATION__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getImplicationAccess().getImplicationLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getImplicationAccess().getRightOrParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Expression returns MulOrDiv
+	 *     Implication returns MulOrDiv
+	 *     Implication.Implication_1_0 returns MulOrDiv
 	 *     Or returns MulOrDiv
 	 *     Or.Or_1_0 returns MulOrDiv
 	 *     And returns MulOrDiv
@@ -355,11 +416,11 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns MulOrDiv
 	 *     PlusOrMinus.Minus_1_0_1_0 returns MulOrDiv
 	 *     MulOrDiv returns MulOrDiv
-	 *     MulOrDiv.MulOrDiv_1_0 returns MulOrDiv
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns MulOrDiv
 	 *     Primary returns MulOrDiv
 	 *
 	 * Constraint:
-	 *     (left=MulOrDiv_MulOrDiv_1_0 (op='*' | op='/') right=Primary)
+	 *     (left=MulOrDiv_MulOrDiv_1_0_0 (op='*' | op='/') right=Primary)
 	 */
 	protected void sequence_MulOrDiv(ISerializationContext context, MulOrDiv semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -369,6 +430,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns Or
+	 *     Implication returns Or
+	 *     Implication.Implication_1_0 returns Or
 	 *     Or returns Or
 	 *     Or.Or_1_0 returns Or
 	 *     And returns Or
@@ -381,7 +444,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns Or
 	 *     PlusOrMinus.Minus_1_0_1_0 returns Or
 	 *     MulOrDiv returns Or
-	 *     MulOrDiv.MulOrDiv_1_0 returns Or
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns Or
 	 *     Primary returns Or
 	 *
 	 * Constraint:
@@ -404,6 +467,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns Minus
+	 *     Implication returns Minus
+	 *     Implication.Implication_1_0 returns Minus
 	 *     Or returns Minus
 	 *     Or.Or_1_0 returns Minus
 	 *     And returns Minus
@@ -416,7 +481,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns Minus
 	 *     PlusOrMinus.Minus_1_0_1_0 returns Minus
 	 *     MulOrDiv returns Minus
-	 *     MulOrDiv.MulOrDiv_1_0 returns Minus
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns Minus
 	 *     Primary returns Minus
 	 *
 	 * Constraint:
@@ -439,6 +504,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns Plus
+	 *     Implication returns Plus
+	 *     Implication.Implication_1_0 returns Plus
 	 *     Or returns Plus
 	 *     Or.Or_1_0 returns Plus
 	 *     And returns Plus
@@ -451,7 +518,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns Plus
 	 *     PlusOrMinus.Minus_1_0_1_0 returns Plus
 	 *     MulOrDiv returns Plus
-	 *     MulOrDiv.MulOrDiv_1_0 returns Plus
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns Plus
 	 *     Primary returns Plus
 	 *
 	 * Constraint:
@@ -474,6 +541,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * Contexts:
 	 *     Expression returns Not
+	 *     Implication returns Not
+	 *     Implication.Implication_1_0 returns Not
 	 *     Or returns Not
 	 *     Or.Or_1_0 returns Not
 	 *     And returns Not
@@ -486,7 +555,7 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     PlusOrMinus.Plus_1_0_0_0 returns Not
 	 *     PlusOrMinus.Minus_1_0_1_0 returns Not
 	 *     MulOrDiv returns Not
-	 *     MulOrDiv.MulOrDiv_1_0 returns Not
+	 *     MulOrDiv.MulOrDiv_1_0_0 returns Not
 	 *     Primary returns Not
 	 *
 	 * Constraint:
@@ -499,6 +568,25 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPrimaryAccess().getExpressionPrimaryParserRuleCall_1_2_0(), semanticObject.getExpression());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AbstractElement returns SimplifyExpression
+	 *     SimplifyExpression returns SimplifyExpression
+	 *
+	 * Constraint:
+	 *     expression=Expression
+	 */
+	protected void sequence_SimplifyExpression(ISerializationContext context, SimplifyExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, ExpressionsPackage.Literals.ABSTRACT_ELEMENT__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ExpressionsPackage.Literals.ABSTRACT_ELEMENT__EXPRESSION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSimplifyExpressionAccess().getExpressionExpressionParserRuleCall_1_0(), semanticObject.getExpression());
 		feeder.finish();
 	}
 	

@@ -5,15 +5,23 @@ ExpressionsModel:
 	elements+=AbstractElement*;
 
 AbstractElement:
-	Variable | EvalExpression;
+	Variable | EvalExpression | SimplifyExpression;
 
 Variable:
 	'var' name=ID '=' expression=Expression;
 
 EvalExpression:
 	'eval' expression=Expression;
+	
+SimplifyExpression:
+	'simplify' expression=Expression;
 
-Expression: Or;
+Expression: Implication;
+
+Implication returns Expression:
+	Or (
+		{Implication.left=current} "->" right=Or
+	)*;
 
 Or returns Expression:
 	And (
@@ -24,6 +32,7 @@ And returns Expression:
 	Equality (
 		{And.left=current} "&&" right=Equality
 	)*;
+	
 
 Equality returns Expression:
 	Comparison (

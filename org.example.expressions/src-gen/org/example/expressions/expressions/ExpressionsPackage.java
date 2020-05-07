@@ -179,6 +179,34 @@ public interface ExpressionsPackage extends EPackage
   int EVAL_EXPRESSION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.example.expressions.expressions.impl.SimplifyExpressionImpl <em>Simplify Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.example.expressions.expressions.impl.SimplifyExpressionImpl
+   * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getSimplifyExpression()
+   * @generated
+   */
+  int SIMPLIFY_EXPRESSION = 4;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLIFY_EXPRESSION__EXPRESSION = ABSTRACT_ELEMENT__EXPRESSION;
+
+  /**
+   * The number of structural features of the '<em>Simplify Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLIFY_EXPRESSION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.example.expressions.expressions.impl.ExpressionImpl <em>Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -186,7 +214,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 4;
+  int EXPRESSION = 5;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -198,6 +226,43 @@ public interface ExpressionsPackage extends EPackage
   int EXPRESSION_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link org.example.expressions.expressions.impl.ImplicationImpl <em>Implication</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.example.expressions.expressions.impl.ImplicationImpl
+   * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getImplication()
+   * @generated
+   */
+  int IMPLICATION = 6;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPLICATION__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPLICATION__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Implication</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IMPLICATION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link org.example.expressions.expressions.impl.OrImpl <em>Or</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -205,7 +270,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getOr()
    * @generated
    */
-  int OR = 5;
+  int OR = 7;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -242,7 +307,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getAnd()
    * @generated
    */
-  int AND = 6;
+  int AND = 8;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -279,7 +344,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getEquality()
    * @generated
    */
-  int EQUALITY = 7;
+  int EQUALITY = 9;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -325,7 +390,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getComparison()
    * @generated
    */
-  int COMPARISON = 8;
+  int COMPARISON = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -371,7 +436,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 9;
+  int PLUS = 11;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -408,7 +473,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getMinus()
    * @generated
    */
-  int MINUS = 10;
+  int MINUS = 12;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -445,7 +510,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getMulOrDiv()
    * @generated
    */
-  int MUL_OR_DIV = 11;
+  int MUL_OR_DIV = 13;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -491,7 +556,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getNot()
    * @generated
    */
-  int NOT = 12;
+  int NOT = 14;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -519,7 +584,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getIntConstant()
    * @generated
    */
-  int INT_CONSTANT = 13;
+  int INT_CONSTANT = 15;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -547,7 +612,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getStringConstant()
    * @generated
    */
-  int STRING_CONSTANT = 14;
+  int STRING_CONSTANT = 16;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -575,7 +640,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getBoolConstant()
    * @generated
    */
-  int BOOL_CONSTANT = 15;
+  int BOOL_CONSTANT = 17;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -603,7 +668,7 @@ public interface ExpressionsPackage extends EPackage
    * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getVariableRef()
    * @generated
    */
-  int VARIABLE_REF = 16;
+  int VARIABLE_REF = 18;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -698,6 +763,16 @@ public interface ExpressionsPackage extends EPackage
   EClass getEvalExpression();
 
   /**
+   * Returns the meta object for class '{@link org.example.expressions.expressions.SimplifyExpression <em>Simplify Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Simplify Expression</em>'.
+   * @see org.example.expressions.expressions.SimplifyExpression
+   * @generated
+   */
+  EClass getSimplifyExpression();
+
+  /**
    * Returns the meta object for class '{@link org.example.expressions.expressions.Expression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -706,6 +781,38 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    */
   EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.example.expressions.expressions.Implication <em>Implication</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Implication</em>'.
+   * @see org.example.expressions.expressions.Implication
+   * @generated
+   */
+  EClass getImplication();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.example.expressions.expressions.Implication#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.example.expressions.expressions.Implication#getLeft()
+   * @see #getImplication()
+   * @generated
+   */
+  EReference getImplication_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.example.expressions.expressions.Implication#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.example.expressions.expressions.Implication#getRight()
+   * @see #getImplication()
+   * @generated
+   */
+  EReference getImplication_Right();
 
   /**
    * Returns the meta object for class '{@link org.example.expressions.expressions.Or <em>Or</em>}'.
@@ -1157,6 +1264,16 @@ public interface ExpressionsPackage extends EPackage
     EClass EVAL_EXPRESSION = eINSTANCE.getEvalExpression();
 
     /**
+     * The meta object literal for the '{@link org.example.expressions.expressions.impl.SimplifyExpressionImpl <em>Simplify Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.example.expressions.expressions.impl.SimplifyExpressionImpl
+     * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getSimplifyExpression()
+     * @generated
+     */
+    EClass SIMPLIFY_EXPRESSION = eINSTANCE.getSimplifyExpression();
+
+    /**
      * The meta object literal for the '{@link org.example.expressions.expressions.impl.ExpressionImpl <em>Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1165,6 +1282,32 @@ public interface ExpressionsPackage extends EPackage
      * @generated
      */
     EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link org.example.expressions.expressions.impl.ImplicationImpl <em>Implication</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.example.expressions.expressions.impl.ImplicationImpl
+     * @see org.example.expressions.expressions.impl.ExpressionsPackageImpl#getImplication()
+     * @generated
+     */
+    EClass IMPLICATION = eINSTANCE.getImplication();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IMPLICATION__LEFT = eINSTANCE.getImplication_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IMPLICATION__RIGHT = eINSTANCE.getImplication_Right();
 
     /**
      * The meta object literal for the '{@link org.example.expressions.expressions.impl.OrImpl <em>Or</em>}' class.

@@ -16,7 +16,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//Variable/name"/>
     </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//EvalExpression"/>
+    <genClasses ecoreClass="Expressions.ecore#//SimplifyExpression"/>
     <genClasses ecoreClass="Expressions.ecore#//Expression"/>
+    <genClasses ecoreClass="Expressions.ecore#//Implication">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Implication/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Implication/right"/>
+    </genClasses>
     <genClasses ecoreClass="Expressions.ecore#//Or">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Or/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//Or/right"/>

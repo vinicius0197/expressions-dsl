@@ -60,6 +60,15 @@ public interface ExpressionsFactory extends EFactory
   EvalExpression createEvalExpression();
 
   /**
+   * Returns a new object of class '<em>Simplify Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simplify Expression</em>'.
+   * @generated
+   */
+  SimplifyExpression createSimplifyExpression();
+
+  /**
    * Returns a new object of class '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,6 +76,15 @@ public interface ExpressionsFactory extends EFactory
    * @generated
    */
   Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Implication</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Implication</em>'.
+   * @generated
+   */
+  Implication createImplication();
 
   /**
    * Returns a new object of class '<em>Or</em>'.

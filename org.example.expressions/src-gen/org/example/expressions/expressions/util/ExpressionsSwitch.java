@@ -103,10 +103,26 @@ public class ExpressionsSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ExpressionsPackage.SIMPLIFY_EXPRESSION:
+      {
+        SimplifyExpression simplifyExpression = (SimplifyExpression)theEObject;
+        T result = caseSimplifyExpression(simplifyExpression);
+        if (result == null) result = caseAbstractElement(simplifyExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ExpressionsPackage.EXPRESSION:
       {
         Expression expression = (Expression)theEObject;
         T result = caseExpression(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ExpressionsPackage.IMPLICATION:
+      {
+        Implication implication = (Implication)theEObject;
+        T result = caseImplication(implication);
+        if (result == null) result = caseExpression(implication);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -275,6 +291,22 @@ public class ExpressionsSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Simplify Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Simplify Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSimplifyExpression(SimplifyExpression object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -286,6 +318,22 @@ public class ExpressionsSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Implication</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Implication</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseImplication(Implication object)
   {
     return null;
   }

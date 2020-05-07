@@ -20,12 +20,14 @@ import org.example.expressions.expressions.Expression;
 import org.example.expressions.expressions.ExpressionsFactory;
 import org.example.expressions.expressions.ExpressionsModel;
 import org.example.expressions.expressions.ExpressionsPackage;
+import org.example.expressions.expressions.Implication;
 import org.example.expressions.expressions.IntConstant;
 import org.example.expressions.expressions.Minus;
 import org.example.expressions.expressions.MulOrDiv;
 import org.example.expressions.expressions.Not;
 import org.example.expressions.expressions.Or;
 import org.example.expressions.expressions.Plus;
+import org.example.expressions.expressions.SimplifyExpression;
 import org.example.expressions.expressions.StringConstant;
 import org.example.expressions.expressions.Variable;
 import org.example.expressions.expressions.VariableRef;
@@ -71,7 +73,21 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass simplifyExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass implicationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -303,9 +319,53 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
    * @generated
    */
   @Override
+  public EClass getSimplifyExpression()
+  {
+    return simplifyExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getExpression()
   {
     return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getImplication()
+  {
+    return implicationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getImplication_Left()
+  {
+    return (EReference)implicationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getImplication_Right()
+  {
+    return (EReference)implicationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -724,7 +784,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     evalExpressionEClass = createEClass(EVAL_EXPRESSION);
 
+    simplifyExpressionEClass = createEClass(SIMPLIFY_EXPRESSION);
+
     expressionEClass = createEClass(EXPRESSION);
+
+    implicationEClass = createEClass(IMPLICATION);
+    createEReference(implicationEClass, IMPLICATION__LEFT);
+    createEReference(implicationEClass, IMPLICATION__RIGHT);
 
     orEClass = createEClass(OR);
     createEReference(orEClass, OR__LEFT);
@@ -804,6 +870,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     // Add supertypes to classes
     variableEClass.getESuperTypes().add(this.getAbstractElement());
     evalExpressionEClass.getESuperTypes().add(this.getAbstractElement());
+    simplifyExpressionEClass.getESuperTypes().add(this.getAbstractElement());
+    implicationEClass.getESuperTypes().add(this.getExpression());
     orEClass.getESuperTypes().add(this.getExpression());
     andEClass.getESuperTypes().add(this.getExpression());
     equalityEClass.getESuperTypes().add(this.getExpression());
@@ -829,7 +897,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
     initEClass(evalExpressionEClass, EvalExpression.class, "EvalExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(simplifyExpressionEClass, SimplifyExpression.class, "SimplifyExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(implicationEClass, Implication.class, "Implication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getImplication_Left(), this.getExpression(), null, "left", null, 0, 1, Implication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getImplication_Right(), this.getExpression(), null, "right", null, 0, 1, Implication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(orEClass, Or.class, "Or", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getOr_Left(), this.getExpression(), null, "left", null, 0, 1, Or.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

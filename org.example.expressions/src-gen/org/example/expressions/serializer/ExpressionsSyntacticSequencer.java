@@ -64,6 +64,7 @@ public class ExpressionsSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) {And.left=}
 	 *     (rule start) (ambiguity) {Comparison.left=}
 	 *     (rule start) (ambiguity) {Equality.left=}
+	 *     (rule start) (ambiguity) {Implication.left=}
 	 *     (rule start) (ambiguity) {Minus.left=}
 	 *     (rule start) (ambiguity) {MulOrDiv.left=}
 	 *     (rule start) (ambiguity) {Or.left=}
@@ -81,6 +82,7 @@ public class ExpressionsSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) {And.left=}
 	 *     (rule start) (ambiguity) {Comparison.left=}
 	 *     (rule start) (ambiguity) {Equality.left=}
+	 *     (rule start) (ambiguity) {Implication.left=}
 	 *     (rule start) (ambiguity) {Minus.left=}
 	 *     (rule start) (ambiguity) {MulOrDiv.left=}
 	 *     (rule start) (ambiguity) {Or.left=}

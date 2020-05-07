@@ -69,7 +69,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
       case ExpressionsPackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case ExpressionsPackage.VARIABLE: return createVariable();
       case ExpressionsPackage.EVAL_EXPRESSION: return createEvalExpression();
+      case ExpressionsPackage.SIMPLIFY_EXPRESSION: return createSimplifyExpression();
       case ExpressionsPackage.EXPRESSION: return createExpression();
+      case ExpressionsPackage.IMPLICATION: return createImplication();
       case ExpressionsPackage.OR: return createOr();
       case ExpressionsPackage.AND: return createAnd();
       case ExpressionsPackage.EQUALITY: return createEquality();
@@ -141,10 +143,34 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
    * @generated
    */
   @Override
+  public SimplifyExpression createSimplifyExpression()
+  {
+    SimplifyExpressionImpl simplifyExpression = new SimplifyExpressionImpl();
+    return simplifyExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Implication createImplication()
+  {
+    ImplicationImpl implication = new ImplicationImpl();
+    return implication;
   }
 
   /**
